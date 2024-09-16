@@ -14,11 +14,17 @@ namespace TestItemsWebAPI.Dto
                 if (reader.TokenType == JsonTokenType.EndObject)
                     break;
 
-                string propertyName = reader.GetString();
-                reader.Read();
+                if (reader.TokenType == JsonTokenType.PropertyName)
+                {
+                    string propertyName = reader.GetString();
+                    reader.Read();
 
-                item.Code = int.Parse(propertyName);
-                item.Value = reader.GetString();
+                    if (int.TryParse(propertyName, out int code))
+                    {
+                        item.Code = code;
+                        item.Value = reader.GetString();
+                    }
+                }
             }
             return item;
         }
