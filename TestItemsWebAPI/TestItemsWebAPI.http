@@ -1,0 +1,13 @@
+@TestItemsWebAPI_HostAddress = http://localhost:5099
+
+
+GET {{TestItemsWebAPI_HostAddress}}/api/items?page=1&pageSize=3
+
+### Добавление нового элемента
+POST {{TestItemsWebAPI_HostAddress}}/api/items
+Content-Type: application/json
+{
+    "name": "New Item",
+    "code": "item123",
+    "description": "This is a new item"
+}
